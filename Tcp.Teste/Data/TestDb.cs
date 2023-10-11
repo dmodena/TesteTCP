@@ -8,6 +8,8 @@ namespace Tcp.Teste.Api.Data
     public class TestDb
     {
         private static TestDb _instance;
+        public ICollection<ExportadorBrasileiro> ExportadorBrasileiroCollection { get => _exportadorBrasileiroCollection; }
+        public ICollection<ExportadorParaguai> ExportadorParaguaiCollection { get => _exportadorParaguaiCollection; }
         private ICollection<ExportadorBrasileiro> _exportadorBrasileiroCollection;
         private ICollection<ExportadorParaguai> _exportadorParaguaiCollection;
 
@@ -28,52 +30,6 @@ namespace Tcp.Teste.Api.Data
         public ExportadorBrasileiro GetExportadorBrasileiroById(int id)
         {
             return _exportadorBrasileiroCollection.FirstOrDefault(x => x.Id == id);
-        }
-
-        public void AddExportadorBrasileiro(ExportadorBrasileiro item)
-        {
-            try
-            {
-                _exportadorBrasileiroCollection.Add(item);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Erro ao inserir item.", ex);
-            }
-        }
-
-        public void UpdateExportadorBrasileiro(int id, ExportadorBrasileiro item)
-        {
-            var dbItem = _exportadorBrasileiroCollection.FirstOrDefault(x => x.Id == id);
-
-            if (dbItem == null)
-                throw new Exception($"Exportador Brasileiro com Id {id} não existe.");
-
-            item.Id = id;
-            _exportadorBrasileiroCollection.Remove(dbItem);
-            _exportadorBrasileiroCollection.Add(item);
-
-            var x = _exportadorBrasileiroCollection;
-        }
-
-        public void DeleteExportadorBrasileiro(int id)
-        {
-            var dbItem = _exportadorBrasileiroCollection.FirstOrDefault(x => x.Id == id);
-
-            if (dbItem == null)
-                throw new Exception($"Exportador Brasileiro com Id {id} não existe.");
-
-            _exportadorBrasileiroCollection.Remove(dbItem);
-        }
-
-        public ICollection<ExportadorParaguai> GetAllExportadorParaguai()
-        {
-            return _exportadorParaguaiCollection.ToList();
-        }
-
-        public ExportadorParaguai GetExportadorParaguaiById(int id)
-        {
-            return _exportadorParaguaiCollection.FirstOrDefault(x => x.Id == id);
         }
 
         private TestDb()

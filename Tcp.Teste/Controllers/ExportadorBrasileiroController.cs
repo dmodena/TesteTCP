@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using Tcp.Teste.Api.Data;
 using Tcp.Teste.Api.Models;
+using Tcp.Teste.Api.Repositories;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,18 +12,18 @@ namespace Tcp.Teste.Api.Controllers
     [ApiController]
     public class ExportadorBrasileiroController : ControllerBase
     {
-        private TestDb _db;
+        private ExportadorBrasileiroRepository _repository;
 
         public ExportadorBrasileiroController()
         {
-            _db = TestDb.GetInstance();
+            _repository = new ExportadorBrasileiroRepository();
         }
 
         // GET: api/br/exportador
         [HttpGet]
         public ActionResult<ICollection<ExportadorBrasileiro>> Get()
         {
-            var collection = _db.GetAllExportadorBrasileiro();
+            var collection = _repository.GetAll();
 
             return Ok(collection);
         }
@@ -32,7 +32,7 @@ namespace Tcp.Teste.Api.Controllers
         [HttpGet("{id}")]
         public ActionResult<ExportadorBrasileiro> Get(int id)
         {
-            var exportador = _db.GetExportadorBrasileiroById(id);
+            var exportador = _repository.GetById(id);
 
             return Ok(exportador);
         }
@@ -44,7 +44,7 @@ namespace Tcp.Teste.Api.Controllers
             try
             {
                 // TODO validate item
-                _db.AddExportadorBrasileiro(item);
+                _repository.Add(item);
                 return Created($"api/br/exportador/{item.Id}", item);
             }
             catch (Exception ex)
@@ -61,7 +61,7 @@ namespace Tcp.Teste.Api.Controllers
             try
             {
                 // TODO validate item
-                _db.UpdateExportadorBrasileiro(id, item);
+                _repository.Update(id, item);
                 return Ok(item);
             }
             catch (Exception ex)
@@ -77,7 +77,7 @@ namespace Tcp.Teste.Api.Controllers
         {
             try
             {
-                _db.DeleteExportadorBrasileiro(id);
+                _repository.Delete(id);
                 return Ok();
             }
             catch (Exception ex)

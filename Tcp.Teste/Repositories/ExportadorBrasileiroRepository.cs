@@ -10,6 +10,7 @@ namespace Tcp.Teste.Api.Repositories
     {
         private TestDb _db;
 
+        // TODO add dependency injection
         public ExportadorBrasileiroRepository()
         {
             _db = TestDb.GetInstance();

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Tcp.Teste.Api.Models;
 
 namespace Tcp.Teste.Api.Data
@@ -21,23 +19,12 @@ namespace Tcp.Teste.Api.Data
             return _instance;
         }
 
-        // TODO this can be done with Generics
-        public ICollection<ExportadorBrasileiro> GetAllExportadorBrasileiro()
-        {
-            return _exportadorBrasileiroCollection.ToList();
-        }
-
-        public ExportadorBrasileiro GetExportadorBrasileiroById(int id)
-        {
-            return _exportadorBrasileiroCollection.FirstOrDefault(x => x.Id == id);
-        }
-
         private TestDb()
         {
-            Populate();
+            Seed();
         }
 
-        private void Populate()
+        private void Seed()
         {
             _exportadorBrasileiroCollection = new List<ExportadorBrasileiro>
             {
@@ -50,11 +37,10 @@ namespace Tcp.Teste.Api.Data
 
             _exportadorParaguaiCollection = new List<ExportadorParaguai>
             {
-                new ExportadorParaguai { Id = 1, Nome = "Exportador Pr A", Email = "exportadorpra@domain.com", Telefone = "+55 41 1234-5678" },
-                new ExportadorParaguai { Id = 2, Nome = "Exportador Pr B", Email = "exportadorprb@domain.com", Telefone = "+55 41 1234-5678" },
-                new ExportadorParaguai { Id = 3, Nome = "Exportador Pr C", Email = "exportadorprc@domain.com", Telefone = "+55 41 1234-5678" },
-                new ExportadorParaguai { Id = 4, Nome = "Exportador Pr D", Email = "exportadorprd@domain.com", Telefone = "+55 41 1234-5678" },
-                new ExportadorParaguai { Id = 5, Nome = "Exportador Pr E", Email = "exportadorpre@domain.com", Telefone = "+55 41 1234-5678" }
+                new ExportadorParaguai { Id = 1, Nome = "Exportador Pr A", Ruc = "12345A", Email = "exportadorpra@domain.com", Telefone = "+55 41 1234-5678" },
+                new ExportadorParaguai { Id = 2, Nome = "Exportador Pr B", Ruc = "12345B", Email = "exportadorprb@domain.com", Telefone = "+55 41 1234-5678" },
+                new ExportadorParaguai { Id = 3, Nome = "Exportador Pr C", Ruc = "12345C", Email = "exportadorprc@domain.com", Telefone = "+55 41 1234-5678" },
+                new ExportadorParaguai { Id = 4, Nome = "Exportador Pr D", Ruc = "12345D", Email = "exportadorprd@domain.com", Telefone = "+55 41 1234-5678" }
             };
         }
     }

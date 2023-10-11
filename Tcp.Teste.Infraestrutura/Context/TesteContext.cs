@@ -9,6 +9,7 @@ namespace Tcp.Teste.Infraestrutura.Context
 	{
 		public string DbPath { get; }
 
+		// TODO use SQLite DbContext instead of TestDb
 		public TesteContext()
 		{
 			var path = Environment.CurrentDirectory;
